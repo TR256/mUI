@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LAYER</title>
+    <link rel="stylesheet" href="../common/meng.css">
+    <style>
+        .layer-mask {
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.1);
+            position: fixed;
+            z-index: 999;
+        }
+
+        .layer-mask > .layer {
+            background: var(--white-color);
+            border: 1px solid var(--default-color);
+            position: absolute;
+            min-width: 180px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .layer-mask > .layer > .layer-header {
+            height: 40px;
+            border-bottom: 1px solid var(--default-color);
+            padding: 5px 20px;
+            line-height: 30px;
+        }
+
+        .layer-mask > .layer > .layer-content {
+            padding: 10px 20px;
+            line-height: 30px;
+            flex: auto;
+        }
+
+        .layer-mask > .layer > .layer-content > * {
+            width: 100%;
+            height: 100%;
+        }
+
+        .layer-mask > .layer > .layer-content > input.prompt-input {
+            height: 30px;
+            border: 1px solid var(--default-color);
+            appearance: none;
+            outline: none;
+            padding: 0 10px;
+        }
+
+        .layer-mask > .layer > .layer-content > input.prompt-input:focus {
+            border: 1px solid var(--primary-color);
+        }
+
+        .layer-mask > .layer > .layer-footer {
+            height: 40px;
+            border-top: 1px solid var(--default-color);
+            padding: 0 20px;
+            line-height: 30px;
+            position: relative;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .layer-mask > .layer > .layer-footer > button {
+            float: right;
+        }
+
+
+    </style>
+</head>
+<body>
+<div>
+    <button class="btn primary" onclick="alertMsg()">ALERT</button>
+    <button class="btn primary" onclick="confirmMsg()">CONFIRM</button>
+    <button class="btn primary" onclick="iframeMsg()">IFRAME</button>
+    <button class="btn primary" onclick="promptMsg()">PROMPT</button>
+</div>
+<script>
+    let mengLayer = {
+        mask: null,
+        layer: null,
+        title: "",
+        content: "",
+        layerHeader: null,
+        layerContent: null,
+        layerFooter: null,
+        init: function (options) {
+            let body = document.querySelector("body");
+            this.mask = body.appendChild(document.createElement('div'));
+            this.mask.className = "layer-mask";
+            this.layer = this.mask.appendChild(document.createElement("div"));
+            this.layer.className = "layer";
+            if (options.height !== undefined && options.height !== null) {
+                this.layer.style.height = options.height;
+            }
+            if (options.width !== undefined && options.width !== null) {
+                this.layer.style.width = options.width;
+            }
+            //
+            this.title = options.title || this.title;
+            this.content = options.content || this.content;
+        },
+        createDialogHeader: function () {
+            this.layerHeader = this.layer.appendChild(document.createElement("div"));
+            this.layerHeader.className = "layer-header";
+            this.layerHeader.innerHTML = this.title;
+        },
+        createDialogContent: function () {
+            this.layerContent = this.layer.appendChild(document.createElement("div"));
+            this.layerContent.className = "layer-content";
+            this.layerContent.innerHTML = this.content;
+
+        },
+        remove: function () {
+            this.mask.remove();
+        },
+        alertDialog: function (options) {
+            this.init(options);
+            this.layer.classList.add("alert");
+            this.createDialogHeader();
+            this.createDialogContent();
+            this.layerFooter = this.layer.appendChild(document.createElement("div"));
+            this.layerFooter.className = "layer-footer";
+            let ensure = this.layerFooter.appendChild(document.createElement("button"));
+            ensure.className = "primary";
+            ensure.innerText = "确定";
+            ensure.onclick = () => {
+                options.ensureEvent.apply(this);
+                this.remove();
+            }
+        },
+        confirmDialog: function (options) {
+            this.init(options);
+            this.layer.classList.add("confirm");
+            this.createDialogHeader();
+            this.createDialogContent();
+            this.layerFooter = this.layer.appendChild(document.createElement("div"));
+            this.layerFooter.className = "layer-footer";
+            let close = this.layerFooter.appendChild(document.createElement("button"));
+            close.className = "default";
+            close.innerText = "关闭";
+            close.onclick = () => {
+                this.remove();
+            }
+            let ensure = this.layerFooter.appendChild(document.createElement("button"));
+            ensure.className = "primary";
+            ensure.innerText = "确定";
+            ensure.onclick = () => {
+                this.remove();
+            }
+        },
+        iframeDialog: function (options) {
+            this.init(options);
+            this.layer.classList.add("iframe");
+            this.createDialogHeader();
+            this.layerContent = this.layer.appendChild(document.createElement("div"));
+            this.layerContent.className = "layer-content";
+            let iframe = this.layerContent.appendChild(document.createElement("iframe"));
+            iframe.src = options.src || "";
+        },
+        promptDialog: function (options) {
+            this.init(options);
+            this.layer.classList.add("prompt");
+            this.createDialogHeader();
+            this.createDialogContent();
+            let promptInput = this.layerContent.appendChild(document.createElement("input"));
+            promptInput.className = "prompt-input";
+            this.layerFooter = this.layer.appendChild(document.createElement("div"));
+            this.layerFooter.className = "layer-footer";
+            let close = this.layerFooter.appendChild(document.createElement("button"));
+            close.className = "default";
+            close.innerText = "关闭";
+            close.onclick = () => {
+                this.remove();
+            }
+            let ensure = this.layerFooter.appendChild(document.createElement("button"));
+            ensure.className = "primary";
+            ensure.innerText = "确定";
+            ensure.onclick = () => {
+                options.ensureEvent.call(this, promptInput.value);
+                this.remove();
+            }
+        }
+    }
+    let alertMsg = function () {
+        mengLayer.alertDialog({
+            title: 'ALERT',
+            content: "THIS IS ALERT CONTENT",
+            ensureEvent: function () {
+                alert("ALERT");
+            }
+        });
+    }
+
+    let confirmMsg = function () {
+        mengLayer.confirmDialog({
+            title: 'CONFIRM',
+            width: "200px",
+            height: "160px",
+            content: "<div>ARE YOU CONFIRM?</div>",
+            ensureEvent: function () {
+                alert("CONFIRM");
+            }
+        });
+    }
+
+    let iframeMsg = function () {
+        mengLayer.iframeDialog({
+            title: 'IFRAME',
+            width: "600px",
+            height: "400px",
+            src: 'button.html',
+        });
+    }
+
+
+    let promptMsg = function () {
+        mengLayer.promptDialog({
+            title: 'PROMPT',
+            ensureEvent: function (value) {
+                alert(value);
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,611 @@
+:root {
+    --success-color: #0ff699;
+    --danger-color: #ff1300;
+    --warn-color: #fc5013;
+    --primary-color: #0082dc;
+    --info-color: #3fceff;
+    --disabled-color: #cccccc;
+    --white-color: #ffffff;
+    --error-color: #ff2b2b;
+    --default-color: #e1e1e1;
+    --active-color: #0798ff;
+    --black-color: #414141;
+    --default-font-size: 14px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 0;
+    font-style: normal;
+    font-weight: normal;
+    color: var(--black-color);
+    font-size: var(--default-font-size);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+/*滚动条*/
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+/*滚动条滑块*/
+::-webkit-scrollbar-thumb {
+    background-color: var(--disabled-color);
+}
+
+/*滚动条滚动槽*/
+::-webkit-scrollbar-track-piece {
+    background-color: transparent;
+}
+
+ol,
+li {
+    list-style: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/***************************************************/
+/***************************************************/
+/***************************************************/
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+/**********************************************************************/
+.row {
+    padding: 10px;
+}
+
+.col1 {
+    width: 8.33%;
+    float: left;
+}
+
+.offset1 {
+    margin-left: 8.33%;
+}
+
+.col2 {
+    width: 16.66%;
+    float: left;
+}
+
+.offset2 {
+    margin-left: 16.66%;
+}
+
+.col3 {
+    width: 25%;
+    float: left;
+}
+
+.offset3 {
+    margin-left: 25%;
+}
+
+.col4 {
+    width: 33.33%;
+    float: left;
+}
+
+.offset4 {
+    margin-left: 33.33%;
+}
+
+.col5 {
+    width: 41.66%;
+    float: left;
+}
+
+.offset5 {
+    margin-left: 41.66%;
+}
+
+.col6 {
+    width: 50%;
+    float: left;
+}
+
+.offset6 {
+    margin-left: 50%;
+}
+
+.col7 {
+    width: 58.33%;
+    float: left;
+}
+
+.offset {
+    margin-left: 58.33%;
+}
+
+.col8 {
+    width: 66.66%;
+    float: left;
+}
+
+.offset8 {
+    margin-left: 66.66%;
+}
+
+.col9 {
+    width: 75%;
+    float: left;
+}
+
+.offset9 {
+    margin-left: 75%;
+}
+
+.col10 {
+    width: 83.33%;
+    float: left;
+}
+
+.offset10 {
+    margin-left: 83.33%;
+}
+
+.col11 {
+    width: 91.66%;
+    float: left;
+}
+
+.offset11 {
+    margin-left: 91.66%;
+}
+
+.col12 {
+    width: 100%;
+}
+
+.offset12 {
+}
+
+/*******************************************************************************/
+.form-group {
+    margin: 10px;
+    display: flex;
+}
+
+.form-group > label {
+    float: left;
+    display: inline-block;
+    width: 80px;
+    text-align: right;
+    line-height: 40px;
+}
+
+.form-cell {
+    line-height: 40px;
+    display: flex;
+    flex: 1;
+    position: relative;
+}
+
+.inline {
+    flex: none;
+}
+
+/*******************************************************************************/
+.form-cell > label {
+    margin: 0;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+.form-cell > input {
+    appearance: none;
+    vertical-align: middle;
+    position: relative;
+    display: inline-block;
+    transition: all .2s;
+    cursor: pointer;
+}
+
+
+/**************************多选按钮*******************************/
+.form-cell > .checkbox {
+    width: 20px;
+    border: 2px solid var(--default-color);
+    margin: 10px;
+    height: 20px;
+    line-height: 40px;
+}
+
+
+.form-cell > .checkbox:checked {
+    border: 2px solid var(--disabled-color);
+    background-color: var(--primary-color);
+}
+
+.form-cell > .checkbox:disabled::after,
+.form-cell > .checkbox:checked::after {
+    content: "";
+    border-left: 3px solid var(--white-color);
+    border-bottom: 3px solid var(--white-color);
+    height: 40%;
+    width: 60%;
+    left: 12%;
+    top: 14%;
+    position: absolute;
+    transform: rotate(-45deg);
+}
+
+.form-cell > .checkbox:disabled {
+    border: 2px solid var(--disabled-color);
+    background-color: var(--disabled-color);
+}
+
+/**************************单选按钮*******************************/
+.form-cell > .radio {
+    width: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--default-color);
+    margin: 10px;
+    height: 20px;
+    line-height: 40px;
+}
+
+.form-cell > .radio:checked {
+    border: 2px solid var(--primary-color);
+    background-color: transparent;
+}
+
+.form-cell > .radio:disabled::after,
+.form-cell > .radio:checked::after {
+    content: "";
+    border-radius: 50%;
+    height: 80%;
+    width: 80%;
+    margin: 10%;
+    position: absolute;
+    transition: border .2s;
+}
+
+.form-cell > .radio:checked::after {
+    background-color: var(--primary-color);
+}
+
+.form-cell > .radio:disabled {
+    border: 2px solid var(--disabled-color);
+}
+
+/**************************开关*******************************/
+.form-cell > .switch {
+    width: 44px;
+    height: 40px;
+    z-index: 99;
+}
+
+.form-cell > .switch + div {
+    position: relative;
+    left: -44px;
+    display: inline-block;
+    vertical-align: middle;
+    height: 20px;
+    line-height: 20px;
+    width: 44px;
+    margin: 10px 0;
+    border: 1px solid var(--disabled-color);
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: var(--white-color);
+    transition: .2s linear;
+}
+
+.form-cell > .switch + div::after {
+    content: "";
+    background-color: var(--disabled-color);
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    left: 3px;
+    top: 3px;
+    border-radius: 50%;
+}
+
+.form-cell > .switch:checked + div::after {
+    content: "";
+    background-color: var(--white-color);
+    left: 28px;
+    border-radius: 50%;
+}
+
+.form-cell > .switch + div > .switch-off,
+.form-cell > .switch:checked + div > .switch-on {
+    font-size: 12px;
+    line-height: 19px;
+    position: absolute;
+}
+
+.form-cell > .switch:checked + div > .switch-off,
+.form-cell > .switch + div > .switch-on {
+    display: none;
+}
+
+.form-cell > .switch:checked + div {
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.form-cell > .switch + div > .switch-off {
+    right: 2px;
+    display: block;
+    color: var(--disabled-color);
+}
+
+.form-cell > .switch:checked + div > .switch-on {
+    display: block;
+    left: 2px;
+    color: var(--white-color);
+}
+
+/**********************************************************/
+.form-cell .input-prefix,
+.form-cell .input-suffix {
+    height: 40px;
+    padding: 0 10px;
+}
+
+.form-cell .input-prefix.input-split,
+.form-cell .input-suffix.input-split {
+    border: 1px solid var(--default-color);
+}
+
+.form-cell .input-prefix.input-split {
+    border-right: 0;
+}
+
+.form-cell .input-suffix.input-split {
+    border-left: 0;
+}
+
+.form-cell .input-prefix > *,
+.form-cell .input-suffix > * {
+    height: 40px;
+    line-height: 40px;
+}
+
+
+.form-cell > .input {
+    outline: none;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    border: 1px solid var(--default-color);
+    transition: all .2s;
+    flex: 1;
+}
+
+.form-cell > .input:focus {
+    border: 1px solid var(--primary-color);
+}
+
+.form-cell > .textarea {
+    outline: none;
+    min-height: 100px;
+    height: auto;
+    line-height: 20px;
+    padding: 5px 10px;
+    resize: vertical;
+    border: 1px solid var(--default-color);
+    flex: 1;
+}
+
+.form-cell > .textarea:focus {
+    border: 1px solid var(--primary-color);
+}
+
+/*********************button**********************/
+
+
+a.btn,
+button {
+    display: inline-block;
+    float: left;
+    height: 30px;
+    padding: 0 10px;
+    margin: 5px;
+    color: var(--white-color);
+    border: 1px solid var(--default-color);
+    opacity: 0.86;
+    cursor: pointer;
+}
+
+a.btn {
+    line-height: 30px;
+    font-size: var(--default-font-size);
+}
+
+a.btn:hover,
+button:hover {
+    opacity: 1;
+}
+
+a.btn.default,
+button.default {
+    background-color: var(--default-color);
+    border: 1px solid var(--default-color);
+    color: var(--black-color);
+}
+
+
+a.btn.primary,
+button.primary {
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+
+a.btn.info,
+button.info {
+    background-color: var(--info-color);
+    border: 1px solid var(--info-color);
+}
+
+
+a.btn.danger,
+button.danger {
+    background-color: var(--danger-color);
+    border: 1px solid var(--danger-color);
+}
+
+a.btn.success,
+button.success {
+    background-color: var(--success-color);
+    border: 1px solid var(--success-color);
+}
+
+a.btn.warn,
+button.warn {
+    background-color: var(--warn-color);
+    border: 1px solid var(--warn-color);
+}
+
+a.btn.disabled,
+button.disabled {
+    background-color: var(--white-color);
+    border: 1px solid var(--disabled-color);
+    color: var(--disabled-color);
+}
+
+
+a.btn.plain,
+button.plain {
+    background-color: var(--white-color);
+}
+
+
+a.btn.warn.plain,
+button.warn.plain {
+    border: 1px solid var(--warn-color);
+    color: var(--warn-color);
+}
+
+a.btn.info.plain,
+button.info.plain {
+    border: 1px solid var(--info-color);
+    color: var(--info-color);
+}
+
+a.btn.danger.plain,
+button.danger.plain {
+    border: 1px solid var(--danger-color);
+    color: var(--danger-color);
+}
+
+a.btn.success.plain,
+button.success.plain {
+    border: 1px solid var(--success-color);
+    color: var(--success-color);
+}
+
+a.btn.default.plain,
+button.default.plain {
+    border: 1px solid var(--default-color);
+    color: var(--black-color);
+}
+
+a.btn.primary.plain,
+button.primary.plain {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-group {
+    margin: 0 5px;
+}
+
+.btn-group > a.bnt,
+.btn-group > button {
+    margin: 8px 0;
+}
+
+/***************************************************/
+.form-cell > .select {
+    display: none;
+}
+
+.form-cell > .select-box {
+    height: 40px;
+    flex: 1;
+    display: inline-block;
+    margin: 0 10px;
+}
+
+
+.form-cell > .select-box > .select-text {
+    border: 1px solid var(--default-color);
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.form-cell > .select-box > .select-text:hover {
+    border: 1px solid var(--primary-color);
+}
+
+.form-cell > .select-box > ul:hover + .select-text {
+    border: 1px solid var(--primary-color);
+}
+
+.form-cell > .select-box > ul {
+    margin-top: 2px;
+    height: 0;
+    background-color: var(--white-color);
+    overflow: hidden;
+    transition: .2s;
+    z-index: 99;
+    position: relative;
+}
+
+.form-cell > .select-box > ul > li {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    border-left: 1px solid var(--default-color);
+    border-right: 1px solid var(--default-color);
+}
+
+.form-cell > .select-box > ul > li:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.form-cell > .select-box > ul > li:first-child {
+    border-top: 1px solid var(--default-color);
+}
+
+.form-cell > .select-box > ul > li:last-child {
+    border-bottom: 1px solid var(--default-color);
+}
+
+/***************************************************/

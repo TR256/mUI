@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DEBOUNCE</title>
+</head>
+<body>
+
+<input id="input" type="text">
+<script>
+
+    function request() {
+        console.log('send request to server')
+    }
+
+    // 延时执行
+    function debounce(fn, delay) {
+        let timer;
+        return function () {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                fn();
+            }, delay);
+        }();
+    }
+
+    let input = document.querySelector("#input");
+
+    input.addEventListener("input", function (){
+        debounce(request, 1000)
+    })
+</script>
+</body>
+</html>
