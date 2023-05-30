@@ -3,8 +3,393 @@
 <head>
     <meta charset="UTF-8">
     <title>TABLE</title>
+    <link rel="stylesheet" href="../common/meng.css">
+    <style>
+        .container {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+        }
+
+        .table-container {
+            padding: 20px;
+        }
+
+        .query-box {
+            border: 1px solid var(--default-color);
+            margin-bottom: 20px;
+        }
+
+        .query-box > ul > li {
+            width: 300px;
+        }
+
+        .table-box {
+            border: 1px solid var(--default-color);
+            padding: 20px;
+        }
+
+        .table-box ul li > a {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .table-box .table-tool {
+            height: 50px;
+        }
+
+        .table-box .table-tool .custom-tools {
+            float: left;
+            height: 50px;
+            margin-left: -5px;
+        }
+
+        .table-box .table-tool .default-tools {
+            float: right;
+            height: 40px;
+        }
+
+        .table-box .table-tool .default-tools > ul > li {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border: 1px solid var(--white-color);
+            background-color: var(--default-color);
+        }
+
+
+        .table-box table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+        }
+
+        .table-box table td,
+        .table-box table th {
+            border: 1px solid var(--default-color);
+            padding: 2px;
+        }
+
+        .table-box table td > div.table-cell {
+            height: 40px;
+            border: 1px solid var(--default-color);
+            line-height: 40px;
+            padding: 0 10px;
+        }
+
+        .table-box table a.btn,
+        .table-box table button {
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .table-box .table-tool ul.inline > li,
+        .table-box .table-content ul.inline > li {
+            margin: 0 5px;
+        }
+
+        .table-box .table-pagination {
+            height: 40px;
+            padding-top: 10px;
+        }
+
+        .table-box .table-pagination ul {
+            float: left;
+            margin-right: 10px;
+        }
+
+        .table-box .table-pagination ul > li {
+            padding: 0 10px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid var(--default-color);
+            text-align: center;
+        }
+
+        .table-box .table-pagination ul.inline > li {
+            width: 30px;
+            margin: 1px;
+        }
+
+        .table-box .table-pagination .page-info {
+            height: 30px;
+            line-height: 30px;
+            float: right;
+        }
+    </style>
 </head>
 <body>
 
+<!--<div class="container">-->
+
+<!--    <div class="table-container">-->
+<!--        <div class="query-box">-->
+<!--            <ul class="inline clear">-->
+<!--                <li>-->
+<!--                    <div class="form-group">-->
+<!--                        <label>NAME：</label>-->
+<!--                        <div class="form-cell">-->
+<!--                            <input name="name" class="input" type="text">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <div class="form-group">-->
+<!--                        <label>METHOD：</label>-->
+<!--                        <div class="form-cell">-->
+<!--                            <select name="method" class="select">-->
+<!--                                <option value="1">GET</option>-->
+<!--                                <option value="2">POST</option>-->
+<!--                                <option value="3">DELETE</option>-->
+<!--                                <option value="4">PUT</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="form-cell">-->
+<!--                            <button class="btn primary">查询</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--        <div class="table-box">-->
+<!--            <div class="table-tool">-->
+<!--                <div class="custom-tools">-->
+<!--                    <ul class="inline">-->
+<!--                        <li>-->
+<!--                            <a href="" class="btn primary">OK</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="" class="btn primary">OK</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="" class="btn primary">OK</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--                <div class="default-tools">-->
+<!--                    <ul class="inline">-->
+<!--                        <li>-->
+<!--                            <a href="">-->
+<!--                                <i>🔥</i>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="">OK</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="">OK</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="table-content">-->
+<!--                <table>-->
+<!--                    <thead>-->
+<!--                    <tr>-->
+<!--                        <th>-->
+<!--                            <div class="form-cell">-->
+<!--                                <input type="checkbox" class="checkbox">-->
+<!--                            </div>-->
+<!--                        </th>-->
+<!--                        <th>-->
+<!--                            NAME-->
+<!--                        </th>-->
+<!--                        <th>-->
+<!--                            URL-->
+<!--                        </th>-->
+<!--                        <th>-->
+<!--                            METHOD-->
+<!--                        </th>-->
+<!--                        <th>-->
+<!--                            ENABLE-->
+<!--                        </th>-->
+<!--                        <th>-->
+<!--                            OPERATE-->
+<!--                        </th>-->
+<!--                    </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody>-->
+<!--                    <tr>-->
+<!--                        <td>-->
+<!--                            <div class="form-cell">-->
+<!--                                <input type="checkbox" class="checkbox">-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <div class="form-cell">-->
+<!--                                <input type="text" class="input" placeholder="NAME">-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <div class="form-cell">-->
+<!--                                <input type="text" class="input" placeholder="URL">-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <div class="form-cell">-->
+<!--                                <select class="select">-->
+<!--                                    <option value="1">GET</option>-->
+<!--                                    <option value="2">POST</option>-->
+<!--                                    <option value="3">DELETE</option>-->
+<!--                                    <option value="4">PUT</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <div class="form-cell">-->
+<!--                                <input class="switch" type="checkbox" name="switch">-->
+<!--                                <div>-->
+<!--                                    <i class="switch-on">ON</i>-->
+<!--                                    <i class="switch-off">OFF</i>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <div>-->
+<!--                                <ul class="inline">-->
+<!--                                    <li>-->
+<!--                                        <i></i>-->
+<!--                                        <a class="btn info" href="">详情</a>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <i></i>-->
+<!--                                        <a class="btn primary" href="">编辑</a>-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <i></i>-->
+<!--                                        <a class="btn danger" href="">删除</a>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--            </div>-->
+<!--            <div class="table-pagination">-->
+<!--                <div class="page-babel">-->
+<!--                    <ul>-->
+<!--                        <li>-->
+<!--                            <a href="">首页</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                    <ul>-->
+<!--                        <li>-->
+<!--                            <a href="">&lt;&lt;</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+
+<!--                    <ul class="inline">-->
+<!--                        <li>-->
+<!--                            <a href="">1</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="">2</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="">3</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="">4</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a href="">5</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                    <ul>-->
+<!--                        <li>-->
+<!--                            <a href="">&gt;&gt;</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                    <ul>-->
+
+<!--                        <li>-->
+<!--                            <a href="">尾页</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+
+<!--                </div>-->
+<!--                <div class="page-info">-->
+<!--                    <span>共计<i>10000000</i>页</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--</div>-->
+
+<div class="container">
+
+    <div class="table-container">
+        <div class="table-box">
+            <div class="table-content">
+                <table id="mTable">
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="../common/meng.js"></script>
+<script>
+    mJs.mTable.table({
+        tableId: "#mTable",
+        checkbox: true,
+        sequence: true,
+        tools: ['refresh'],
+        columns: [
+            [
+                {
+                    title: "NAME",
+                    field: "name",
+                    align: "center",
+                    editor: {
+                        type: "text",
+                    }
+                },
+                {
+                    title: "NOTHING",
+                    field: "nothing",
+                    formatter: function (value, row, index) {
+                        return "OK"
+                    }
+                },
+                {
+                    title: "URL",
+                    field: "url"
+                },
+                {
+                    title: "METHOD",
+                    field: "method",
+                    editor: {
+                        type: "select",
+                        data: [
+                            { text: "GET", value: "1"},
+                            { text: "POST", value: "2"},
+                            { text: "DELETE", value: "3"},
+                        ]
+                    }
+                },
+                {
+                    title: "OPERATE",
+                    formatter: function (value, row, index) {
+                        let actions = [];
+                        actions.push("<li><a class='btn primary'>编辑</a></li>");
+                        actions.push("<li><a class='btn danger'>删除</a></li>")
+                        return actions.join("");
+                    }
+                }
+            ]
+        ],
+    })
+</script>
 </body>
 </html>

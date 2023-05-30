@@ -4,69 +4,6 @@
     <meta charset="UTF-8">
     <title>SELECT</title>
     <link rel="stylesheet" href="../common/meng.css">
-    <style>
-
-        .form-cell > .select {
-            display: none;
-        }
-
-        .form-cell > .select-box {
-            height: 40px;
-            flex: 1;
-            display: inline-block;
-            margin: 0 10px;
-        }
-
-
-        .form-cell > .select-box > .select-text {
-            border: 1px solid var(--default-color);
-            padding: 0 10px;
-            cursor: pointer;
-        }
-
-        .form-cell > .select-box > .select-text:hover {
-            border: 1px solid var(--primary-color);
-        }
-
-        .form-cell > .select-box > ul:hover + .select-text {
-            border: 1px solid var(--primary-color);
-        }
-
-        .form-cell > .select-box > ul {
-            margin-top: 2px;
-            height: 0;
-            background-color: var(--white-color);
-            overflow: hidden;
-            transition: .2s;
-            z-index: 99;
-            position: relative;
-        }
-
-        .form-cell > .select-box > ul > li {
-            width: 100%;
-            height: 40px;
-            line-height: 40px;
-            padding: 0 10px;
-            border-left: 1px solid var(--default-color);
-            border-right: 1px solid var(--default-color);
-            cursor: pointer;
-        }
-
-        .form-cell > .select-box > ul > li:hover {
-            background-color: var(--primary-color);
-            color: var(--white-color);
-        }
-
-        .form-cell > .select-box > ul > li:first-child {
-            border-top: 1px solid var(--default-color);
-        }
-
-        .form-cell > .select-box > ul > li:last-child {
-            border-bottom: 1px solid var(--default-color);
-        }
-
-
-    </style>
 </head>
 <body>
 
@@ -74,7 +11,7 @@
     <div class="form-group">
         <label>选择框</label>
         <div class="form-cell">
-            <select name="method">
+            <select name="method" class="select">
                 <option value="1">A</option>
                 <option value="2" selected>B</option>
                 <option value="3">C</option>
@@ -87,7 +24,7 @@
     <div class="form-group">
         <label>选择框</label>
         <div class="form-cell">
-            <select name="fruit">
+            <select name="fruit" class="select">
                 <option value="1">苹果</option>
                 <option value="2">香蕉</option>
                 <option value="3" selected>橘子</option>
@@ -96,103 +33,6 @@
     </div>
 </div>
 
-
-<script>
-    (function (window, document) {
-        let mengSelector = function (select) {
-            return new mengSelector.prototype.init(select);
-        };
-
-        mengSelector.prototype = {
-            init: function (select) {
-                select.classList.add("select");
-                let options = select.querySelectorAll("option");
-                let selectBox = select.parentNode.appendChild(document.createElement("div"));
-                selectBox.className = "select-box";
-                selectBox.setAttribute("collapse", "true");
-                let valueDiv = selectBox.appendChild(document.createElement('div'));
-                valueDiv.className = "select-value";
-                let valueInput = valueDiv.appendChild(document.createElement("input"));
-                valueInput.type = "hidden";
-                valueInput.name = select.name;
-                let textDiv = selectBox.appendChild(document.createElement("div"));
-                textDiv.className = "select-text";
-                textDiv.innerText = "请选择";
-                let optionUl = selectBox.appendChild(document.createElement("ul"));
-                for (let i = 0; i < options.length; i++) {
-                    let optionLi = optionUl.appendChild(document.createElement("li"));
-                    optionLi.setAttribute("data-value", options[i].value);
-                    optionLi.innerText = options[i].text;
-                    if (options[i].selected) {
-                        valueInput.value = options[i].value;
-                        textDiv.innerText = options[i].text;
-                    }
-                }
-                document.onclick = event => {
-                    let trigger = true;
-                    let text, box, value,  ul;
-                    let tagName = event.target.tagName.toUpperCase();
-                    if (tagName === "DIV") {
-                        box = event.target.parentNode;
-                    } else if (tagName === "LI") {
-                        box = event.target.parentNode.parentNode;
-                    } else {
-                        trigger = false;
-                    }
-                    let uls = document.querySelectorAll(".select-box > ul");
-                    for (let i = 0; i < uls.length; i++) {
-                        if (uls[i].parentNode !== box) {
-                            uls[i].style.height = "0";
-                            uls[i].parentNode.setAttribute("collapse", "true");
-                        }
-                    }
-                    if (!trigger || !box.classList.contains("select-box")) {
-                        return;
-                    }
-                    value = box.querySelector("div.select-value > input")
-                    text = box.querySelector("div.select-text");
-                    ul = box.querySelector("ul");
-                    if (tagName === "DIV") {
-                        if (box.getAttribute("collapse") === "true") {
-                            box.setAttribute("collapse", "false");
-                            ul.style.height = "auto";
-                        } else {
-                            box.setAttribute("collapse", "true");
-                            ul.style.height = "0";
-                        }
-                    } else {
-                        let lis = ul.querySelectorAll("li");
-                        for (let i = 0; i < lis.length; i++) {
-                            if (event.target === lis[i]) {
-                                value.value = lis[i].getAttribute("data-value");
-                                text.innerText = lis[i].innerText;
-                                if (box.getAttribute("collapse") === "true") {
-                                    box.setAttribute("collapse", "false");
-                                    ul.style.height = "auto";
-                                } else {
-                                    box.setAttribute("collapse", "true");
-                                    ul.style.height = "0";
-                                }
-                            }
-                        }
-                    }
-                }
-
-            },
-        };
-        //将构造函数挂载到全局window
-        mengSelector.prototype.init.prototype = mengSelector.prototype;
-        window.mengSelector = mengSelector;
-        return mengSelector;
-    })(window, document);
-</script>
-<script>
-    (function () {
-        let selects = document.getElementsByTagName("select");
-        for (let i = 0; i < selects.length; i++) {
-            mengSelector(selects[i]);
-        }
-    })();
-</script>
+<script src="../common/meng.js"></script>
 </body>
 </html>

@@ -1,14 +1,14 @@
 :root {
-    --success-color: #0ff699;
-    --danger-color: #ff1300;
-    --warn-color: #fc5013;
-    --primary-color: #0082dc;
-    --info-color: #3fceff;
-    --disabled-color: #cccccc;
-    --white-color: #ffffff;
+    --success-color: #20BF55;
+    --danger-color: #FF3C38;
+    --warn-color: #FF5714;
+    --primary-color: #00A8E8;
+    --info-color: #4ECDC4;
+    --disabled-color: #B9B9B9;
+    --white-color: #FFFFFF;
     --error-color: #ff2b2b;
-    --default-color: #e1e1e1;
-    --active-color: #0798ff;
+    --default-color: #EAEAEA;
+    --active-color: #1982C4;
     --black-color: #414141;
     --default-font-size: 14px;
 }
@@ -17,7 +17,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    border: 0;
     font-style: normal;
     font-weight: normal;
     color: var(--black-color);
@@ -57,10 +56,7 @@ li {
     list-style: none;
 }
 
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
+
 
 /***************************************************/
 /***************************************************/
@@ -73,10 +69,20 @@ table {
     float: right;
 }
 
-.clear {
+/*通过伪元素解决高度坍塌*/
+.clear::before,
+.clear::after{
+    content: "";
+    visibility: hidden;
+    display: block;
+    height: 0;
+    line-height: 0;
     clear: both;
 }
 
+ul.inline > li{
+    float: left;
+}
 /**********************************************************************/
 .row {
     padding: 10px;
@@ -261,6 +267,7 @@ table {
 .form-cell > .checkbox:disabled {
     border: 2px solid var(--disabled-color);
     background-color: var(--disabled-color);
+    cursor: not-allowed;
 }
 
 /**************************单选按钮*******************************/
@@ -295,24 +302,25 @@ table {
 
 .form-cell > .radio:disabled {
     border: 2px solid var(--disabled-color);
+    cursor: not-allowed;
 }
 
 /**************************开关*******************************/
 .form-cell > .switch {
-    width: 44px;
+    width: 50px;
     height: 40px;
     z-index: 99;
 }
 
 .form-cell > .switch + div {
     position: relative;
-    left: -44px;
+    left: -50px;
     display: inline-block;
     vertical-align: middle;
-    height: 20px;
-    line-height: 20px;
-    width: 44px;
-    margin: 10px 0;
+    height: 26px;
+    line-height: 26px;
+    width: 50px;
+    margin: 7px 0;
     border: 1px solid var(--disabled-color);
     border-radius: 20px;
     cursor: pointer;
@@ -324,24 +332,24 @@ table {
     content: "";
     background-color: var(--disabled-color);
     position: absolute;
-    width: 12px;
-    height: 12px;
+    width: 20px;
+    height: 20px;
     left: 3px;
-    top: 3px;
+    top: 2px;
     border-radius: 50%;
 }
 
 .form-cell > .switch:checked + div::after {
     content: "";
     background-color: var(--white-color);
-    left: 28px;
+    left: 27px;
     border-radius: 50%;
 }
 
 .form-cell > .switch + div > .switch-off,
 .form-cell > .switch:checked + div > .switch-on {
     font-size: 12px;
-    line-height: 19px;
+    line-height: 25px;
     position: absolute;
 }
 
@@ -431,9 +439,9 @@ a.btn,
 button {
     display: inline-block;
     float: left;
-    height: 30px;
+    height: 40px;
     padding: 0 10px;
-    margin: 5px;
+    margin: 0 5px;
     color: var(--white-color);
     border: 1px solid var(--default-color);
     opacity: 0.86;
@@ -441,7 +449,7 @@ button {
 }
 
 a.btn {
-    line-height: 30px;
+    line-height: 40px;
     font-size: var(--default-font-size);
 }
 
@@ -495,6 +503,7 @@ button.disabled {
     background-color: var(--white-color);
     border: 1px solid var(--disabled-color);
     color: var(--disabled-color);
+    cursor: not-allowed;
 }
 
 
@@ -558,21 +567,22 @@ button.primary.plain {
     height: 40px;
     flex: 1;
     display: inline-block;
-    margin: 0 10px;
 }
 
 
 .form-cell > .select-box > .select-text {
     border: 1px solid var(--default-color);
+    height: 40px;
     padding: 0 10px;
     cursor: pointer;
 }
 
-.form-cell > .select-box > .select-text:hover {
-    border: 1px solid var(--primary-color);
+.form-cell > .select-box > .select-text,
+.form-cell > .select-box > ul > li{
+    text-align: left;
 }
 
-.form-cell > .select-box > ul:hover + .select-text {
+.form-cell > .select-box > .select-text:hover {
     border: 1px solid var(--primary-color);
 }
 
